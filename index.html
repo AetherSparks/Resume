@@ -7,8 +7,8 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <style>
     :root {
-      --bg-dark: linear-gradient(-45deg, #1f1c2c, #928dab, #0f0f0f, #000000);
-      --text-dark: #fff;
+      --bg-dark: #000000; /* PURE BLACK */
+      --text-dark: #ffffff;
       --glass-dark: rgba(0, 0, 0, 0.3);
       --border-dark: rgba(255, 255, 255, 0.2);
     }
@@ -20,14 +20,6 @@
       background: var(--bg-dark);
       color: var(--text-dark);
       font-family: 'Segoe UI', sans-serif;
-      animation: bgMove 20s ease infinite;
-      background-size: 400% 400%;
-    }
-
-    @keyframes bgMove {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .container {
@@ -83,6 +75,7 @@
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
       width: 100%;
       height: auto;
+      background: #ffffff; /* white canvas background */
     }
   </style>
 </head>
