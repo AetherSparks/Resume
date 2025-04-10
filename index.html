@@ -44,10 +44,21 @@
       100% { background-position: 0% 50%; }
     }
 
+    .wave-top {
+      width: 100%;
+      margin-bottom: -20px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(10px); }
+    }
+
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 5vh 2rem;
+      padding: 2vh 2rem 5vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,12 +71,17 @@
       background: linear-gradient(to right, #f8ffae, #43c6ac);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      animation: fadeInDown 1.2s ease-in-out;
+      animation: fadeInDown 1.5s ease-out, glow 3s ease-in-out infinite alternate;
     }
 
     @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-20px); }
+      from { opacity: 0; transform: translateY(-40px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 5px #fff; }
+      to { text-shadow: 0 0 20px #f8ffae; }
     }
 
     .card {
@@ -77,12 +93,17 @@
       background: var(--glass-dark);
       border: 1px solid var(--border-dark);
       box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-      transition: background 0.4s ease, border 0.4s ease;
+      animation: fadeInCard 2s ease forwards;
     }
 
     body.light-mode .card {
       background: var(--glass-light);
       border: 1px solid var(--border-light);
+    }
+
+    @keyframes fadeInCard {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .button-row {
@@ -96,15 +117,17 @@
     .glass-button {
       position: relative;
       overflow: hidden;
-      padding: 0.8rem 1.8rem;
+      padding: 0.9rem 2rem;
       font-size: 1rem;
+      font-weight: bold;
       border-radius: 40px;
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 255, 255, 0.08);
       color: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       cursor: pointer;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      backdrop-filter: blur(12px);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
     }
 
     .glass-button::before {
@@ -114,7 +137,7 @@
       left: -100%;
       width: 200%;
       height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
       transition: all 0.5s ease;
     }
 
@@ -123,8 +146,8 @@
     }
 
     .glass-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      transform: scale(1.05);
+      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
     }
 
     iframe {
@@ -134,12 +157,6 @@
       border-radius: 16px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.2);
       transition: filter 0.3s ease;
-    }
-
-    /* Wavy Footer SVG */
-    .wave {
-      width: 100%;
-      margin-top: 3rem;
     }
 
     @media (max-width: 768px) {
@@ -159,6 +176,11 @@
   </style>
 </head>
 <body>
+  <!-- Wave on top -->
+  <div class="wave-top">
+    <img src="https://raw.githubusercontent.com/BEPb/BEPb/5c63fa170d1cbbb0b1974f05a3dbe6aca3f5b7f3/assets/Bottom_up.svg" width="100%" />
+  </div>
+
   <div class="container">
     <h1>Abhiraj Ghose's Resume</h1>
     <div class="card">
@@ -170,15 +192,9 @@
     </div>
   </div>
 
-  <!-- Animated Wave -->
-  <div class="wave">
-    <img src="https://raw.githubusercontent.com/BEPb/BEPb/5c63fa170d1cbbb0b1974f05a3dbe6aca3f5b7f3/assets/Bottom_up.svg" width="100%" />
-  </div>
-
   <script>
     function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle('light-mode');
+      document.body.classList.toggle('light-mode');
     }
   </script>
 </body>
