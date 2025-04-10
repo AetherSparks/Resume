@@ -47,7 +47,7 @@
     .container {
       max-width: 960px;
       margin: 0 auto;
-      padding: 4rem 2rem 3rem; /* more breathing room */
+      padding: 4rem 2rem 3rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -86,7 +86,6 @@
       animation: fadeInCard 2s ease forwards;
       display: flex;
       flex-direction: column;
-      height: 85vh; /* increased height */
     }
 
     body.light-mode .card {
@@ -103,7 +102,7 @@
       display: flex;
       justify-content: center;
       gap: 1rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
 
@@ -118,7 +117,7 @@
       color: inherit;
       border: 1px solid rgba(255, 255, 255, 0.3);
       cursor: pointer;
-      text-decoration: none; /* No underline */
+      text-decoration: none;
       transition: all 0.4s ease;
       backdrop-filter: blur(12px);
       box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
@@ -144,12 +143,13 @@
       box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
     }
 
-    iframe {
+    .resume-image {
       width: 100%;
-      height: 300%;
-      border: none;
+      max-width: 100%;
+      height: auto;
       border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      object-fit: contain;
     }
 
     @media (max-width: 768px) {
@@ -160,10 +160,6 @@
       .glass-button {
         font-size: 0.9rem;
         padding: 0.6rem 1.2rem;
-      }
-
-      .card {
-        height: 80vh;
       }
     }
   </style>
@@ -177,7 +173,7 @@
         <a class="glass-button" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>📄 Download</a>
         <button class="glass-button" onclick="toggleTheme()">🌗 Toggle Theme</button>
       </div>
-      <iframe src="Abhiraj Ghose Resume 23-02-2025.pdf#view=FitH" title="Abhiraj Ghose Resume"></iframe>
+      <img src="resume-image.jpg" alt="Abhiraj Ghose Resume" class="resume-image" />
     </div>
   </div>
 
