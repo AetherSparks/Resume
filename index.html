@@ -1,111 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Abhiraj Ghose's Resume</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
-  <style>
-    :root {
-      --bg-dark: #000000; /* PURE BLACK */
-      --text-dark: #ffffff;
-      --glass-dark: rgba(0, 0, 0, 0.3);
-      --border-dark: rgba(255, 255, 255, 0.2);
-    }
+h1 {
+  font-size: 2.8rem;
+  text-align: center;
+  background: linear-gradient(to right, #f8ffae, #43c6ac, #f8ffae);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: flareIn 0.8s ease-out, pulseGlow 1.5s ease-in-out infinite alternate;
+  letter-spacing: 1px;
+}
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+@keyframes flareIn {
+  from { opacity: 0; transform: translateY(-60px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 
-    html, body {
-      min-height: 100vh;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      font-family: 'Segoe UI', sans-serif;
-    }
-
-    .container {
-      max-width: 960px;
-      margin: auto;
-      padding: 4rem 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      background: linear-gradient(to right, #f8ffae, #43c6ac);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: fadeInDown 1.5s ease-out, glow 3s ease-in-out infinite alternate;
-      text-align: center;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 5px #fff; }
-      to { text-shadow: 0 0 20px #f8ffae; }
-    }
-
-    .glass-button {
-      padding: 0.9rem 2rem;
-      font-size: 1rem;
-      font-weight: bold;
-      border-radius: 40px;
-      background: rgba(255, 255, 255, 0.08);
-      color: inherit;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      cursor: pointer;
-      text-decoration: none;
-      backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-    }
-
-    .glass-button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-    }
-
-    #pdf-canvas {
-      border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      width: 100%;
-      height: auto;
-      background: #ffffff; /* white canvas background */
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Abhiraj Ghose's Resume</h1>
-    <a class="glass-button" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>📄 Download PDF</a>
-    <canvas id="pdf-canvas"></canvas>
-  </div>
-
-  <script>
-    const url = "Abhiraj Ghose Resume 23-02-2025.pdf";
-
-    const renderPDF = async () => {
-      const loadingTask = pdfjsLib.getDocument(url);
-      const pdf = await loadingTask.promise;
-      const page = await pdf.getPage(1);
-
-      const scale = 2.5;
-      const viewport = page.getViewport({ scale });
-
-      const canvas = document.getElementById("pdf-canvas");
-      const context = canvas.getContext("2d");
-      canvas.height = viewport.height;
-      canvas.width = viewport.width;
-
-      await page.render({ canvasContext: context, viewport }).promise;
-    };
-
-    renderPDF();
-  </script>
-</body>
-</html>
+@keyframes pulseGlow {
+  0% {
+    text-shadow: 0 0 5px #fff, 0 0 10px #43c6ac, 0 0 15px #43c6ac;
+  }
+  100% {
+    text-shadow: 0 0 15px #fff, 0 0 30px #43c6ac, 0 0 40px #f8ffae;
+  }
+}
