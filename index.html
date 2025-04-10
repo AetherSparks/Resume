@@ -6,9 +6,14 @@
   <title>Abhiraj Ghose's Resume</title>
   <style>
     :root {
-      --bg-gradient: linear-gradient(-45deg, #1f1c2c, #928dab, #e0c3fc, #8ec5fc);
-      --glass-bg: rgba(255, 255, 255, 0.08);
-      --glass-border: rgba(255, 255, 255, 0.2);
+      --bg-light: linear-gradient(-45deg, #e3fdf5, #ffe6fa, #f9f9f9, #e0c3fc);
+      --bg-dark: linear-gradient(-45deg, #1f1c2c, #928dab, #0f0f0f, #000000);
+      --text-light: #111;
+      --text-dark: #fff;
+      --glass-light: rgba(255, 255, 255, 0.3);
+      --glass-dark: rgba(0, 0, 0, 0.3);
+      --border-light: rgba(0, 0, 0, 0.1);
+      --border-dark: rgba(255, 255, 255, 0.2);
     }
 
     * {
@@ -18,13 +23,19 @@
     }
 
     html, body {
-      scroll-behavior: smooth;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-gradient);
+      scroll-behavior: smooth;
+      min-height: 100vh;
+      color: var(--text-dark);
+      background: var(--bg-dark);
       background-size: 400% 400%;
       animation: backgroundShift 20s ease infinite;
-      color: #ffffff;
-      height: 100%;
+      transition: all 0.5s ease;
+    }
+
+    body.light-mode {
+      color: var(--text-light);
+      background: var(--bg-light);
     }
 
     @keyframes backgroundShift {
@@ -41,23 +52,6 @@
       flex-direction: column;
       align-items: center;
       gap: 2rem;
-      animation: fadeIn 1.5s ease forwards;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .card {
-      background: var(--glass-bg);
-      border: 1px solid var(--glass-border);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-radius: 20px;
-      padding: 2rem;
-      width: 100%;
-      box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
     }
 
     h1 {
@@ -74,42 +68,63 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    .card {
+      width: 100%;
+      padding: 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: var(--glass-dark);
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+      transition: background 0.4s ease, border 0.4s ease;
+    }
+
+    body.light-mode .card {
+      background: var(--glass-light);
+      border: 1px solid var(--border-light);
+    }
+
     .button-row {
       display: flex;
       justify-content: center;
       gap: 1rem;
       margin-bottom: 1.5rem;
+      flex-wrap: wrap;
     }
 
-    .download-btn, .theme-toggle {
-      padding: 0.7rem 1.5rem;
-      border-radius: 50px;
-      border: none;
+    .glass-button {
+      position: relative;
+      overflow: hidden;
+      padding: 0.8rem 1.8rem;
       font-size: 1rem;
-      font-weight: 500;
+      border-radius: 40px;
+      background: rgba(255, 255, 255, 0.05);
+      color: inherit;
+      border: 1px solid rgba(255, 255, 255, 0.2);
       cursor: pointer;
       transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
     }
 
-    .download-btn {
-      background: #00c6ff;
-      color: white;
-      box-shadow: 0 0 10px rgba(0,198,255,0.5);
+    .glass-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+      transition: all 0.5s ease;
     }
 
-    .download-btn:hover {
-      background: #0078a8;
+    .glass-button:hover::before {
+      left: 100%;
+    }
+
+    .glass-button:hover {
       transform: translateY(-2px);
-    }
-
-    .theme-toggle {
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-    }
-
-    .theme-toggle:hover {
-      background: rgba(255,255,255,0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     iframe {
@@ -117,8 +132,14 @@
       height: 120vh;
       border: none;
       border-radius: 16px;
-      margin-top: 2rem;
       box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: filter 0.3s ease;
+    }
+
+    /* Wavy Footer SVG */
+    .wave {
+      width: 100%;
+      margin-top: 3rem;
     }
 
     @media (max-width: 768px) {
@@ -126,7 +147,7 @@
         font-size: 2rem;
       }
 
-      .download-btn, .theme-toggle {
+      .glass-button {
         font-size: 0.9rem;
         padding: 0.6rem 1.2rem;
       }
@@ -142,26 +163,22 @@
     <h1>Abhiraj Ghose's Resume</h1>
     <div class="card">
       <div class="button-row">
-        <a class="download-btn" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>Download Resume</a>
-        <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+        <a class="glass-button" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>📄 Download</a>
+        <button class="glass-button" onclick="toggleTheme()">🌗 Toggle Theme</button>
       </div>
       <iframe src="Abhiraj Ghose Resume 23-02-2025.pdf#view=FitH" title="Abhiraj Ghose Resume"></iframe>
     </div>
   </div>
 
+  <!-- Animated Wave -->
+  <div class="wave">
+    <img src="https://raw.githubusercontent.com/BEPb/BEPb/5c63fa170d1cbbb0b1974f05a3dbe6aca3f5b7f3/assets/Bottom_up.svg" width="100%" />
+  </div>
+
   <script>
     function toggleTheme() {
       const body = document.body;
-      const isDark = body.classList.toggle('dark-mode');
-      if (isDark) {
-        body.style.background = '#0f0f0f';
-        document.querySelector('.card').style.background = 'rgba(255, 255, 255, 0.05)';
-        document.querySelector('.card').style.border = '1px solid rgba(255, 255, 255, 0.15)';
-      } else {
-        body.style.background = '';
-        document.querySelector('.card').style.background = '';
-        document.querySelector('.card').style.border = '';
-      }
+      body.classList.toggle('light-mode');
     }
   </script>
 </body>
