@@ -1,151 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Abhiraj Ghose's Resume</title>
-    <style>
-        :root {
-            --bg-light: #f2f2f2;
-            --bg-dark: #121212;
-            --text-light: #333;
-            --text-dark: #f2f2f2;
-            --glass-bg: rgba(255, 255, 255, 0.15);
-            --glass-bg-dark: rgba(0, 0, 0, 0.4);
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Abhiraj Ghose's Resume</title>
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(-45deg, #1f1c2c, #928dab, #e0c3fc, #8ec5fc);
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.2);
+    }
 
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(-45deg, #74ebd5, #ACB6E5, #fbc2eb, #a6c1ee);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            transition: background 0.3s ease;
-            color: var(--text-light);
-        }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
+    html, body {
+      scroll-behavior: smooth;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-gradient);
+      background-size: 400% 400%;
+      animation: backgroundShift 20s ease infinite;
+      color: #ffffff;
+      height: 100%;
+    }
 
-        .container {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-        }
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        .glass-card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            padding: 2rem;
-            max-width: 1000px;
-            width: 100%;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 5vh 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      animation: fadeIn 1.5s ease forwards;
+    }
 
-        h1 {
-            text-align: center;
-            margin-top: 0;
-            font-size: 2.5rem;
-            color: inherit;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        embed {
-            width: 100%;
-            height: 700px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
+    .card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 2rem;
+      width: 100%;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
+    }
 
-        .controls {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 1rem;
-            align-items: center;
-        }
+    h1 {
+      font-size: 2.8rem;
+      text-align: center;
+      background: linear-gradient(to right, #f8ffae, #43c6ac);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: fadeInDown 1.2s ease-in-out;
+    }
 
-        .download-btn {
-            background: #007aff;
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            text-decoration: none;
-            transition: background 0.3s ease;
-        }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .download-btn:hover {
-            background: #005fcc;
-        }
+    .button-row {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
 
-        .theme-toggle {
-            cursor: pointer;
-            background: none;
-            border: 2px solid currentColor;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s ease;
-        }
+    .download-btn, .theme-toggle {
+      padding: 0.7rem 1.5rem;
+      border-radius: 50px;
+      border: none;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
 
-        .theme-toggle:hover {
-            transform: rotate(20deg);
-        }
+    .download-btn {
+      background: #00c6ff;
+      color: white;
+      box-shadow: 0 0 10px rgba(0,198,255,0.5);
+    }
 
-        /* Dark mode styles */
-        body.dark {
-            background: #121212;
-            color: var(--text-dark);
-        }
+    .download-btn:hover {
+      background: #0078a8;
+      transform: translateY(-2px);
+    }
 
-        body.dark .glass-card {
-            background: var(--glass-bg-dark);
-        }
+    .theme-toggle {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
 
-        body.dark .download-btn {
-            background: #00b4d8;
-        }
+    .theme-toggle:hover {
+      background: rgba(255,255,255,0.1);
+    }
 
-        @media (max-width: 768px) {
-            embed {
-                height: 500px;
-            }
+    iframe {
+      width: 100%;
+      height: 120vh;
+      border: none;
+      border-radius: 16px;
+      margin-top: 2rem;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    }
 
-            h1 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    @media (max-width: 768px) {
+      h1 {
+        font-size: 2rem;
+      }
+
+      .download-btn, .theme-toggle {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.2rem;
+      }
+
+      iframe {
+        height: 100vh;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="glass-card">
-            <div class="controls">
-                <a class="download-btn" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>Download PDF</a>
-                <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
-            </div>
-            <h1>Abhiraj Ghose's Resume</h1>
-            <embed src="Abhiraj Ghose Resume 23-02-2025.pdf" type="application/pdf" />
-        </div>
+  <div class="container">
+    <h1>Abhiraj Ghose's Resume</h1>
+    <div class="card">
+      <div class="button-row">
+        <a class="download-btn" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>Download Resume</a>
+        <button class="theme-toggle" onclick="toggleTheme()">🌓 Toggle Theme</button>
+      </div>
+      <iframe src="Abhiraj Ghose Resume 23-02-2025.pdf#view=FitH" title="Abhiraj Ghose Resume"></iframe>
     </div>
+  </div>
 
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-        }
-    </script>
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      const isDark = body.classList.toggle('dark-mode');
+      if (isDark) {
+        body.style.background = '#0f0f0f';
+        document.querySelector('.card').style.background = 'rgba(255, 255, 255, 0.05)';
+        document.querySelector('.card').style.border = '1px solid rgba(255, 255, 255, 0.15)';
+      } else {
+        body.style.background = '';
+        document.querySelector('.card').style.background = '';
+        document.querySelector('.card').style.border = '';
+      }
+    }
+  </script>
 </body>
 </html>
