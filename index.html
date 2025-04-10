@@ -2,43 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Abhiraj Ghose's Resume</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
   <style>
     :root {
-      --bg-light: linear-gradient(-45deg, #e3fdf5, #ffe6fa, #f9f9f9, #e0c3fc);
       --bg-dark: linear-gradient(-45deg, #1f1c2c, #928dab, #0f0f0f, #000000);
-      --text-light: #111;
       --text-dark: #fff;
-      --glass-light: rgba(255, 255, 255, 0.3);
       --glass-dark: rgba(0, 0, 0, 0.3);
-      --border-light: rgba(0, 0, 0, 0.1);
       --border-dark: rgba(255, 255, 255, 0.2);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     html, body {
       min-height: 100vh;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      scroll-behavior: smooth;
-      color: var(--text-dark);
       background: var(--bg-dark);
+      color: var(--text-dark);
+      font-family: 'Segoe UI', sans-serif;
+      animation: bgMove 20s ease infinite;
       background-size: 400% 400%;
-      animation: backgroundShift 20s ease infinite;
-      transition: all 0.5s ease;
     }
 
-    body.light-mode {
-      color: var(--text-light);
-      background: var(--bg-light);
-    }
-
-    @keyframes backgroundShift {
+    @keyframes bgMove {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
@@ -46,22 +32,21 @@
 
     .container {
       max-width: 960px;
-      margin: 0 auto;
-      padding: 4rem 2rem 3rem;
+      margin: auto;
+      padding: 4rem 2rem;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1.5rem;
-      min-height: 100vh;
+      gap: 2rem;
     }
 
     h1 {
       font-size: 2.8rem;
-      text-align: center;
       background: linear-gradient(to right, #f8ffae, #43c6ac);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       animation: fadeInDown 1.5s ease-out, glow 3s ease-in-out infinite alternate;
+      text-align: center;
     }
 
     @keyframes fadeInDown {
@@ -74,41 +59,7 @@
       to { text-shadow: 0 0 20px #f8ffae; }
     }
 
-    .card {
-      width: 100%;
-      padding: 1.5rem;
-      border-radius: 20px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      background: var(--glass-dark);
-      border: 1px solid var(--border-dark);
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-      animation: fadeInCard 2s ease forwards;
-      display: flex;
-      flex-direction: column;
-    }
-
-    body.light-mode .card {
-      background: var(--glass-light);
-      border: 1px solid var(--border-light);
-    }
-
-    @keyframes fadeInCard {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .button-row {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      flex-wrap: wrap;
-    }
-
     .glass-button {
-      position: relative;
-      overflow: hidden;
       padding: 0.9rem 2rem;
       font-size: 1rem;
       font-weight: bold;
@@ -118,69 +69,50 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
       cursor: pointer;
       text-decoration: none;
-      transition: all 0.4s ease;
       backdrop-filter: blur(12px);
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.05);
-    }
-
-    .glass-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
-      transition: all 0.5s ease;
-    }
-
-    .glass-button:hover::before {
-      left: 100%;
+      transition: all 0.3s ease;
     }
 
     .glass-button:hover {
       transform: scale(1.05);
-      box-shadow: 0 8px 30px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
     }
 
-    .resume-image {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
+    #pdf-canvas {
       border-radius: 16px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-      object-fit: contain;
-    }
-
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .glass-button {
-        font-size: 0.9rem;
-        padding: 0.6rem 1.2rem;
-      }
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+      width: 100%;
+      height: auto;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h1>Abhiraj Ghose's Resume</h1>
-    <div class="card">
-      <div class="button-row">
-        <a class="glass-button" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>📄 Download</a>
-        <button class="glass-button" onclick="toggleTheme()">🌗 Toggle Theme</button>
-      </div>
-      <img src="resume-image.jpg" alt="Abhiraj Ghose Resume" class="resume-image" />
-    </div>
+    <a class="glass-button" href="Abhiraj Ghose Resume 23-02-2025.pdf" download>📄 Download PDF</a>
+    <canvas id="pdf-canvas"></canvas>
   </div>
 
   <script>
-    function toggleTheme() {
-      document.body.classList.toggle('light-mode');
-    }
+    const url = "Abhiraj Ghose Resume 23-02-2025.pdf";
+
+    const renderPDF = async () => {
+      const loadingTask = pdfjsLib.getDocument(url);
+      const pdf = await loadingTask.promise;
+      const page = await pdf.getPage(1);
+
+      const scale = 2.5;
+      const viewport = page.getViewport({ scale });
+
+      const canvas = document.getElementById("pdf-canvas");
+      const context = canvas.getContext("2d");
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+
+      await page.render({ canvasContext: context, viewport }).promise;
+    };
+
+    renderPDF();
   </script>
 </body>
 </html>
