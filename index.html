@@ -159,20 +159,25 @@
     <h1>Abhiraj Ghose's Resume</h1>
     <div class="card">
       <div class="button-row">
-        <a class="glass-button" href="Abhiraj Ghose Resume 18-05-2025.pdf" download>📄 Download</a>
+        <a id="download-btn" class="glass-button" download>📄 Download</a>
         <button class="glass-button" onclick="toggleTheme()">🌗 Toggle Theme</button>
       </div>
       <canvas id="pdf-canvas"></canvas>
     </div>
   </div>
 
-  
   <script>
     function toggleTheme() {
       document.body.classList.toggle('light-mode');
     }
 
+    // Single source of truth for the PDF file
     const url = "Abhiraj Ghose Resume 18-05-2025.pdf";
+
+    // Set the download link dynamically
+    document.getElementById("download-btn").href = url;
+
+    // Render the PDF
     const canvas = document.getElementById("pdf-canvas");
     const context = canvas.getContext("2d");
 
